@@ -6,7 +6,15 @@ import ssl
 import PySimpleGUI as sg
 import speech_recognition as sr
 app_id = env.appid
-ssl.create_default_context = ssl._create_unverified_context
+try:
+        _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+        # Legacy Python that doesn't verify HTTPS certificates by default
+        pass
+else:
+        # Handle target environment that doesn't support HTTPS verification
+        ssl._create_default_https_context = _create_unverified_https_context
+print("App Id: "+app_id)
 client = wolframalpha.Client(app_id)
 engine = pyttsx3.init()
 r = sr.Recognizer()
@@ -18,6 +26,15 @@ def speakText(command):
         engine.say(""+command)
         engine.runAndWait()
 
+def findWikiResult(question):
+        wiki_res = wikipedia.summary(question, sentences=1)
+        speakText(wiki_res)
+
+def findWolframResult(question):
+        res = client.query(question)
+        wolfram_res = next(res.results).text
+        speakText(wolfram_res)
+
 while(1):
         try:
                 r = sr.Recognizer()
@@ -27,7 +44,16 @@ while(1):
                         MyText = r.recognize_google(audio)
                         MyText = MyText.lower()
                         print("Did you say: "+MyText)
-                        speakText(MyText)
+                        try:
+                                findWolframResult(MyText)
+                        except:
+                                print("Couldn't fetch wolfram results")
+                        
+                        try:
+                                findWikiResult(MyText)
+                        except:
+                                print("Exception occurred")
+
         except sr.RequestError as er:
                 print("Could not request results {0}".format(er))
         except sr.UnknownValueError:

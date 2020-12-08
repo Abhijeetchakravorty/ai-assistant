@@ -3,8 +3,9 @@ import ssl
 import wikipedia
 import PySimpleGUI as sg
 import pyttsx3
+import env
 
-app_id = 'UPR7XE-TAL3H6HTU6'  # get your own at https://products.wolframalpha.com/api/
+app_id = env.appid  # get your own at https://products.wolframalpha.com/api/
 ssl._create_default_https_context = ssl._create_unverified_context
 client = wolframalpha.Client(app_id)
 
