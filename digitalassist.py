@@ -48,7 +48,6 @@ while(1):
                                 findWolframResult(MyText)
                         except:
                                 print("Couldn't fetch wolfram results")
-                        
                         try:
                                 findWikiResult(MyText)
                         except:
