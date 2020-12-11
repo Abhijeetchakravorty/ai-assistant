@@ -27,12 +27,16 @@ while(True):
                                 confirm = int(''.join(format(ord(i), 'b') for i in confirm))
                                 path = os.getcwd()+"/oscar/setup"
                                 if (confirm == confirmRcvd):
-                                        os.mkdir(path+env.apiDirName)
-                                        i = open(path+env.apiDirName+"/"+env.directoryInIt, "w+")
-                                        s = open(path+env.apiDirName+"/"+env.serializerInIt, "w+")
-                                        v = open(path+env.apiDirName+"/"+env.viewsInIt, "w+")
-                                        u = open(path+env.apiDirName+"/"+env.urlInIt, "w+")
-                                        break
+                                        try:
+                                                os.makedirs(path+env.apiDirName)
+                                                i = open(path+env.apiDirName+"/"+env.directoryInIt, "w+")
+                                                s = open(path+env.apiDirName+"/"+env.serializerInIt, "w+")
+                                                v = open(path+env.apiDirName+"/"+env.viewsInIt, "w+")
+                                                u = open(path+env.apiDirName+"/"+env.urlInIt, "w+")
+                                                break
+                                        except OSError as e:
+                                                print("Directory exists")
+
                                 else:
                                         counter = 0
                 else:
@@ -54,6 +58,25 @@ while(True):
                         5. Crawl some data \n
                         6. Create a basic website
                 """)
-                services.speakText("So "+user+", what can I do for you?")
+                
+                services.speakText("So "+user+", what can I do for you? Please choose an option")
+                option = services.oscarIsOnlyListening("I am sorry! I couldn't hear that")
+                print(option)
+                if (option == 110111111011101100101):
+                        
+                elif (option == 111010011101111101111):
+
+                elif (option == 11101001101000111001011001011100101):
+
+                elif (option == 1100110110111111101011110010):
+
+                elif (option == 1100110110100111101101100101):
+
+                elif (optino == 111001111010011111000):
+
+                else:
+                        print("Could not find a matching option")
+                        pass
+                break
         except:
                 pass

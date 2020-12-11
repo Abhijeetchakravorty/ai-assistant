@@ -43,12 +43,14 @@ def createDir(location):
         else:
                 pass
 
-def oscarIsOnlyListening(command, sorryText):
+def oscarIsOnlyListening(sorryText):
         with sr.Microphone() as source:
                 if (source is not None):
                         audio = r.listen(source)
                         MyText = r.recognize_google(audio)
-                        return MyText
+                        MyText = MyText.lower()
+                        data = int(''.join(format(ord(i), 'b') for i in MyText))
+                        return data
                 else:
                         speakText(sorryText)
                         return None
