@@ -32,8 +32,7 @@ def createDir(location):
                 pass
         elif _platform == "darwin":
                 # MAC OS X
-                path = os.getcwd()+env.setupApiLocation
-                os.mkdir(path)
+                
         elif _platform == "win32":
                 # Windows
                 pass
