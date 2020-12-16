@@ -32,6 +32,7 @@ def createDir(location):
                 pass
         elif _platform == "darwin":
                 # MAC OS X
+                pass
         elif _platform == "win32":
                 # Windows
                 pass
