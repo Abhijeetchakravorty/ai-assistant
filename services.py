@@ -21,6 +21,7 @@ def oscarIsListening(counter, sorryText, user):
                         MyText = r.recognize_google(audio)
                         MyText = MyText.lower()
                         counter = 1
+                        print(MyText)
                         return MyText, counter
                 else:
                         speakText(sorryText)
@@ -65,6 +66,8 @@ def oscarIsOnlyListening(sorryText):
                         MyText = r.recognize_google(audio)
                         MyText = MyText.lower()
                         data = int(''.join(format(ord(i), 'b') for i in MyText))
+                        print(data)
+                        print(MyText)
                         return data
                 else:
                         speakText(sorryText)
