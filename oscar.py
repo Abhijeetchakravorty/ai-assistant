@@ -46,6 +46,7 @@ while(True):
                         if (counter != 0):
                                 user = data
                                 confirm, counter = services.oscarIsListening(counter, sorryText, None)
+                                print("I am here")
                                 confirmRcvd = int(''.join(format(ord(i), 'b') for i in "yes"))
                                 confirm = int(''.join(format(ord(i), 'b') for i in confirm))
                                 path = os.getcwd()+"/oscar/setup"
@@ -66,7 +67,7 @@ while(True):
                 services.speakText("Okay "+user+", here are the list of things which I can do. Please choose anyone one of them")
                 services.speakText(""" 
                         1. Create calendar events \n
-                        2. Play some music \n¡™™
+                        2. Play some music \n
                         3. Open a website with a url \n
                         4. Open a game \n
                         5. Crawl some data \n
