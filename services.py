@@ -65,10 +65,7 @@ def oscarIsOnlyListening(sorryText):
                         audio = r.listen(source)
                         MyText = r.recognize_google(audio)
                         MyText = MyText.lower()
-                        data = int(''.join(format(ord(i), 'b') for i in MyText))
-                        print(data)
-                        print(MyText)
-                        return data
+                        return MyText
                 else:
                         speakText(sorryText)
                         return None
