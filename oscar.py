@@ -4,9 +4,10 @@ from sys import platform as _platform
 import os
 import appscript
 from pathlib import Path
-# import services
-# sorryText = "I am sorry! I couldn't hear your name. Could you please try again?"
-# user = "User!"
+import services
+import osx
+sorryText = "I am sorry! I couldn't hear your name. Could you please try again?"
+user = "User!"
 file  = Path(os.getcwd()+"/"+env.projectName+"/"+env.projectName+"/"+env.urlInIt).read_text()
 # print(file)
 data = []
@@ -19,7 +20,6 @@ print(parts)
 url = "path('"+env.setupApiEndPoint+"', include('"+env.setupApiUrlWiring+"', '"+env.setupApiDef+"'))"
 parts.insert(0, url)
 print(parts)
-
 # # file.seek(520)
 # # print(file.tell())
 # # print(file.readline())
@@ -76,7 +76,7 @@ while(True):
                 services.speakText("Okay "+user+", here are the list of things which I can do. Please choose anyone one of them")
                 services.speakText(""" 
                         1. Create calendar events \n
-                        2. Play some music \n
+                        2. Play some music \n¡™™
                         3. Open a website with a url \n
                         4. Open a game \n
                         5. Crawl some data \n
@@ -87,7 +87,16 @@ while(True):
                 option = services.oscarIsOnlyListening("I am sorry! I couldn't hear that")
                 print(option)
                 if (option == 110111111011101100101):
-
+                        ostype = services.returnTypeOfOs()
+                        if (ostype == "osx"):
+                                services.speakText("Please provide the time for setting the event: ")
+                                datetime = services.oscarIsOnlyListening()
+                                services.speakText("Please provide a title for the event.")
+                                title = services.oscarIsOnlyListening()
+                                services.speakText("For how long the event should last?")
+                                print(datetime)
+                                print(title)
+                                # osx.createAppleCalendarEvent()
                 elif (option == 111010011101111101111):
 
                 elif (option == 11101001101000111001011001011100101):
