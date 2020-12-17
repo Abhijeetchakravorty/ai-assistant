@@ -4,23 +4,24 @@ import ssl
 import os
 from pathlib import Path
 import services
-import osx
+# import osx
 try:
         _create_unverified_https_context = ssl._crate_unverified_context
 except AttributeError:
         pass
 else:
         ssl._create_default_https_context = _create_unverified_https_context
-        #  2. Play some music \n
-        #                                 3. Open a website with a url \n
-        #                                 4. Open a game \n
-        #                                 5. Crawl some data \n
-        #                                 6. Create a basic website \n
-
+       
 services.speakText("""Welcome! I am Oscar. Your personal assistant""")
+services.speakText("""Hi Jyoti! You are very hot!""")
 services.speakText("""I can perform some small tasks like
                                         1. Create calendar events \n
-                                       
+                                          2. Play some music \n
+                                        3. Open a website with a url \n
+                                        4. Open a game \n
+                                        5. Crawl some data \n
+                                        6. Create a basic website \n
+                                
                                         
                 What would you like me to do?""")
 data = int(input("Enter choice: "))
@@ -52,5 +53,10 @@ if (data == 1):
                 print(string)
                 timestamp = datetime.fromtimestamp(string)
                 print(timestamp)
+        elif (services.returnTypeOfOs() == "linux"):
+                services.speakText("Need to write code for ubuntu")
         else:
+                services.speakText("Incompatible OS detected")
                 print("Incompatible OS detected")
+elif (data ==2):
+        pass
