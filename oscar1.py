@@ -27,30 +27,67 @@ data = int(input("Enter choice: "))
 
 if (data == 1):
         if (services.returnTypeOfOs() == "osx"):
+                x = datetime.now()
                 services.speakText("Please enter the date and time on which you would like to set the event")
                 #date input
                 services.speakText("Enter the year")
-                year = int(input("Enter year: "))
-                services.speakText("Enter the month")
-                month = int(input("Enter month: "))
-                services.speakText("Enter date")
-                dt = int(input("Enter date only: "))
+                while(True):
+                        year = int(input("Enter year: "))
+                        if (year < x.year):
+                                services.speakText("Please enter a current or future year")
+                        else:
+                                break
                 
-                #time input
-                services.speakText("Enter hour")
-                hour = int(input("Enter hour: "))
+                while(True):
+                        services.speakText("Enter the month")
+                        month = int(input("Enter month: "))
+                        if (month < x.month):
+                                services.speakText("Please choose a future month or current month")
+                        else:
+                                if (month < 10):
+                                        month = "0"+str(month)
+                                break
+
+                while(True):
+                        services.speakText("Enter date only")
+                        dt = int(input("Enter date only: "))
+                        if (dt < x.day):
+                                services.speakText("Please enter a future date")
+                        else:
+                                if (dt < 10):
+                                        dt = "0"+str(dt)
+                                break
+
+                while(True):
+                        services.speakText("Enter hour")
+                        hour = int(input("Enter hour: "))
+                        #time input
+                        if(services.currIsSelected(dt, month, year)):
+                                currTime = services.currTime()[0]
+                                print(currTime)
+                                # for i in range(len(currTime)):
+                                #         if (int(i) < hour and int(i)):
+
+                                break
+                        else:
+                                break
+                        
+                
 
                 services.speakText("Enter minutes")
                 mints = int(input("Enter minutes: "))
+                
+                if (mints < 10):
+                        mints = "0"+str(mints)
 
                 services.speakText("Enter seconds")
                 sec = int(input("Enter seconds"))
+                if (sec < 10):
+                        sec = "0"+str(sec)
 
                 fulltime = ""+str(year)+"-"+str(month)+"-"+str(dt)+" "+str(hour)+":"+str(mints)+":"+str(sec)+".000000"
                 print(fulltime)
-                string = datetime.datetime.strptime(fulltime, "%Y-%m-%d %H:%M:%S.%f")
+                string = datetime.fromisoformat(fulltime)
                 print(string)
-                timestamp = datetime.fromtimestamp(string)
-                print(timestamp)
         else:
                 print("Incompatible OS detected")

@@ -4,6 +4,7 @@ import wolframalpha
 import wikipedia
 import pyttsx3
 import env
+from datetime import datetime
 app_id = env.appid
 client = wolframalpha.Client(app_id)
 engine = pyttsx3.init()
@@ -71,3 +72,23 @@ def oscarIsOnlyListening(sorryText):
                 else:
                         speakText(sorryText)
                         return None
+                
+def currIsSelected(givendate, month, year):
+        givendate = int(givendate)
+        month = int(month)
+        year = int(year)
+        currDt = datetime.now()
+        if (currDt.year == year and currDt.month == month and currDt.day == givendate):
+                return True
+        else:
+                return False
+        
+def currTime():
+        now = datetime.now()
+        currTime = now.strftime("%H:%M:%S")
+        currTime = currTime.split(":")
+        print(currTime)
+
+
+
+
