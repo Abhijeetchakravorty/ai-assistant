@@ -5,6 +5,7 @@ import wikipedia
 import pyttsx3
 import env
 from datetime import datetime
+from datetime import timedelta
 app_id = env.appid
 client = wolframalpha.Client(app_id)
 engine = pyttsx3.init()
@@ -72,23 +73,14 @@ def oscarIsOnlyListening(sorryText):
                 else:
                         speakText(sorryText)
                         return None
-                
-def currIsSelected(givendate, month, year):
-        givendate = int(givendate)
-        month = int(month)
-        year = int(year)
-        currDt = datetime.now()
-        if (currDt.year == year and currDt.month == month and currDt.day == givendate):
-                return True
-        else:
-                return False
         
-def currTime():
+def currTimeStamp():
         now = datetime.now()
-        currTime = now.strftime("%H:%M:%S")
-        currTime = currTime.split(":")
-        print(currTime)
+        ts = now.timestamp()
+        return ts
 
 
-
-
+def add_hours(time_string, hr):
+        updated = ( time_string + timedelta( hours=hr )).strftime('%Y-%m-%d %H:%M:%S.%f')
+        print(updated)
+        return updated

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import env
 import ssl
 import os
@@ -24,7 +24,7 @@ services.speakText("""I can perform some small tasks like
                                         
                 What would you like me to do?""")
 data = int(input("Enter choice: "))
-
+sec = 00.000000
 if (data == 1):
         if (services.returnTypeOfOs() == "osx"):
                 x = datetime.now()
@@ -59,35 +59,28 @@ if (data == 1):
                                 break
 
                 while(True):
-                        services.speakText("Enter hour")
-                        hour = int(input("Enter hour: "))
-                        #time input
-                        if(services.currIsSelected(dt, month, year)):
-                                currTime = services.currTime()[0]
-                                print(currTime)
-                                # for i in range(len(currTime)):
-                                #         if (int(i) < hour and int(i)):
+                        try:
+                                services.speakText("Enter hour")
+                                hour = int(input("Enter hour: "))
+                                services.speakText("Enter minutes")
+                                mints = int(input("Enter minutes: "))
+                                fullTime = ""+str(year)+"-"+str(month)+"-"+str(dt)+" "+str(hour)+":"+str(mints)+":"+str(sec)
+                                finalTime = datetime.strptime(fullTime, "%Y-%m-%d %H:%M:%S.%f")
+                                startTimestamp = datetime.timestamp(finalTime)
+                                services.speakText("Please provide a title for the event")
+                                title = input("Title for the event: ")
+                                services.speakText("PLease provide the duration of the event in hours")
+                                duration = int(input("Please provide duration in hours: "))
+                                endTimeString = datetime.strptime(services.add_hours(finalTime, duration), "%Y-%m-%d %H:%M:%S.%f")
+                                endTimeStamp = datetime.timestamp(endTimeString)
+                                print(endTimeStamp)
+                                if (services.currTimeStamp() < startTimestamp):
+                                        osx.createAppleCalendarEvent(startTimestamp, endTimeStamp, title)
+                                        break
+                                else:
+                                        services.speakText("Please provide a higher timing")
+                        except:
+                                print("Unable to get ctag")
 
-                                break
-                        else:
-                                break
-                        
-                
-
-                services.speakText("Enter minutes")
-                mints = int(input("Enter minutes: "))
-                
-                if (mints < 10):
-                        mints = "0"+str(mints)
-
-                services.speakText("Enter seconds")
-                sec = int(input("Enter seconds"))
-                if (sec < 10):
-                        sec = "0"+str(sec)
-
-                fulltime = ""+str(year)+"-"+str(month)+"-"+str(dt)+" "+str(hour)+":"+str(mints)+":"+str(sec)+".000000"
-                print(fulltime)
-                string = datetime.fromisoformat(fulltime)
-                print(string)
         else:
                 print("Incompatible OS detected")
