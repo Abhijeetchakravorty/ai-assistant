@@ -20,7 +20,8 @@ else:
 services.speakText("""Welcome! I am Oscar. Your personal assistant""")
 services.speakText("""I can perform some small tasks like
                                         1. Create calendar events \n
-                                       
+                                        2. Open a website with a url \n
+                                        3. Open a game \n
                                         
                 What would you like me to do?""")
 data = int(input("Enter choice: "))
@@ -73,7 +74,6 @@ if (data == 1):
                                 duration = int(input("Please provide duration in hours: "))
                                 endTimeString = datetime.strptime(services.add_hours(finalTime, duration), "%Y-%m-%d %H:%M:%S.%f")
                                 endTimeStamp = datetime.timestamp(endTimeString)
-                                print(endTimeStamp)
                                 if (services.currTimeStamp() < startTimestamp):
                                         osx.createAppleCalendarEvent(startTimestamp, endTimeStamp, title)
                                         break
@@ -84,3 +84,16 @@ if (data == 1):
 
         else:
                 print("Incompatible OS detected")
+
+elif (data==2):
+        if (services.returnTypeOfOs() == "osx"):
+                services.speakText("Please provide a website url")
+                url = input("Url: ")
+                print(url)
+                osx.openNewTab(url)        
+        else:
+                print("Incompatible OS detected")
+elif (data==3):
+       print("Play a game")
+else:
+        pass
