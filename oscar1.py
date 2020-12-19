@@ -94,6 +94,6 @@ elif (data==2):
         else:
                 print("Incompatible OS detected")
 elif (data==3):
-       print("Play a game")
+       pass
 else:
         pass
