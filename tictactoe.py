@@ -1,6 +1,7 @@
 import itertools 
 from itertools import combinations, chain
 pos = [0, 2, 4, 8, 10, 12, 16, 18, 20]
+possub = [{0, 2, 4}, {8, 10, 12}, {16, 18, 20}, {0, 8, 16}, {2, 10, 18}, {4, 12, 20}, {0, 10, 20}, {4, 10, 16}]
 bars = [1, 3, 9, 11, 17, 19]
 bases = []
 def findsubsets(s, n): 
@@ -60,23 +61,38 @@ def updatePosition(board, position, player):
         return board
 def playerOneMoveFunc(board, player1):
         playerOneMove = int(input("\n"+str(player1)+" please choose position: "))
-        if (playerOneMove < 10):
+        if (0 != playerOneMove < 10):
                 updatePosition(board, playerOneMove, 1)
         else:
                 print("This position does not exist in the board")
                 playerOneMoveFunc(board, player1)
 def playerTwoMoveFunc(board, player2):
         playerTwoMove = int(input("\n"+str(player2)+" please choose position: "))
-        if (playerTwoMove < 10):
+        if (0 != playerTwoMove < 10):
                 updatePosition(board, playerTwoMove, 2)
         else:
                 print("This position does not exist in the board")
                 playerTwoMoveFunc(board, player2)
-def checkWinner(board):
-        data = findsubsets(pos, 3)
+def checkWinner(board, player1, player2):
+        data = possub
+        notFound = True
         for i in range(len(data)):
-                if (i==0):
-                        print(type(data[i]))
+                a = []
+                for val in data[i]:
+                        a.append(val)
+                if ((a[0] is not None and a[1] is not None and a[2] is not None) and (board[a[0]]["value"] == board[a[1]]["value"] == board[a[2]]["value"] != "  ")):
+                        notFound = False
+                        if (board[a[0]]["value"] == "X "):
+                                print("Winner is "+str(player1))
+                        else:
+                                print("Winner is "+str(player2))
+                        break
+        if (notFound == False):
+                return True
+        else:
+                return False
+                        
+                        
                 
 print("Welcome to Tic Tac Toe!")
 print("\n\n\n")
@@ -88,5 +104,10 @@ player1 = input("Please provide player 1 name: ")
 player2 = input("Please provide player 2 name: ")
 while(True):
         playerOneMoveFunc(board, player1)
+        data = checkWinner(board, player1, player2)
+        if (data == True):
+                break
         playerTwoMoveFunc(board, player2)
-        checkWinner(board)
+        data = checkWinner(board, player1, player2)
+        if (data == True):
+                break    
