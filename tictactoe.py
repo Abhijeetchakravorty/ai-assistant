@@ -83,8 +83,10 @@ def checkWinner(board, player1, player2):
                 if ((a[0] is not None and a[1] is not None and a[2] is not None) and (board[a[0]]["value"] == board[a[1]]["value"] == board[a[2]]["value"] != "  ")):
                         notFound = False
                         if (board[a[0]]["value"] == "X "):
+                                print()
                                 print("Winner is "+str(player1))
                         else:
+                                print()
                                 print("Winner is "+str(player2))
                         break
         if (notFound == False):
