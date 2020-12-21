@@ -10,7 +10,8 @@ def makeBoard():
                                 "index": i,
                                 "type": "pos",
                                 "value": "  ",
-                                "pos": counter
+                                "pos": counter,
+                                "marked": False
                         }
                         counter += 1
                 elif (i in bars):
@@ -18,7 +19,8 @@ def makeBoard():
                                 "index": i,
                                 "value": "|",
                                 "type": "struct",
-                                "pos": None
+                                "pos": None,
+                                "marked": None
                         }
                 else:
                         bases.append(i)
@@ -26,7 +28,8 @@ def makeBoard():
                                 "index": i,
                                 "value": "___",
                                 "type": "base",
-                                "pos": None
+                                "pos": None,
+                                "marked": None
                         }
                 
                 data.append(thisdict)
@@ -48,24 +51,51 @@ def checkMovementStatus(data):
                         else:
                                 return True
 
-def updatePosition(board, position):
+def updatePosition(board, position, player):
         for i in range(len(board)):
                 if (board[i]["pos"] == position):
-                        print("I am here in "+str(position))
-                        board[i]["value"] = "X "
+                        if not board[i]["marked"]:
+                                if (player == 1):
+                                        board[i]["value"] = "X "
+                                else:
+                                        board[i]["value"] = "O "
+                                board[i]["marked"] = True
+                                printBoard(board)
+                        else:
+                                print("This item has already been marked")
+                                if (player == 1):
+                                        playerOneMoveFunc(board)
+                                else:
+                                        playerTwoMoveFunc(board)
         return board
 
+
+def playerOneMoveFunc(board):
+        playerOneMove = int(input("\n"+player1+" please choose position: "))
+        if (playerOneMove < 10):
+                updatePosition(board, playerOneMove, 1)
+        else:
+                print("This position does not exist in the board")
+                playerOneMoveFunc(board)
+
+def playerTwoMoveFunc(board):
+        playerTwoMove = int(input("\n"+player2+" please choose position: "))
+        if (playerTwoMove < 10):
+                updatePosition(board, playerTwoMove, 2)
+        else:
+                print("This position does not exist in the board")
+                playerTwoMoveFunc(board)
+        
 
 print("Welcome to Tic Tac Toe!")
 print("\n\n\n")
 board = makeBoard()
-print(board)
+# print(board)
 printBoard(board)
 print("\n\n\n")
 print("\nThere are 2 players in this game. \n Player 1 marks X and player 2 marks O \n Do not cheat. Enjoy!")
 player1 = input("Please provide player 1 name: ")
 player2 = input("Please provide player 2 name: ")
 while(True):
-        playerOneMove = int(input("\n"+player1+" please choose position: "))
-        board = updatePosition(board, playerOneMove)
-        printBoard(board)
+        playerOneMoveFunc(board)
+        playerTwoMoveFunc(board)
