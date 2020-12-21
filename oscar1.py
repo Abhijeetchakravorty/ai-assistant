@@ -4,25 +4,23 @@ import ssl
 import os
 from pathlib import Path
 import services
-import osx
+# import osx
 try:
         _create_unverified_https_context = ssl._crate_unverified_context
 except AttributeError:
         pass
 else:
         ssl._create_default_https_context = _create_unverified_https_context
-        #  2. Play some music \n
-        #                                 3. Open a website with a url \n
-        #                                 4. Open a game \n
-        #                                 5. Crawl some data \n
-        #                                 6. Create a basic website \n
-
+       
 services.speakText("""Welcome! I am Oscar. Your personal assistant""")
+services.speakText("""Hi Jyoti! You are very hot!""")
 services.speakText("""I can perform some small tasks like
                                         1. Create calendar events \n
-                                        2. Open a website with a url \n
-                                        3. Open a game \n
-                                        
+                                        2. Play some music \n
+                                        3. Open a website with a url \n
+                                        4. Open a game \n
+                                        5. Crawl some data \n
+                                        6. Create a basic website \n
                 What would you like me to do?""")
 data = int(input("Enter choice: "))
 sec = 00.000000
@@ -81,10 +79,6 @@ if (data == 1):
                                         services.speakText("Please provide a higher timing")
                         except:
                                 print("Unable to get ctag")
-
-        else:
-                print("Incompatible OS detected")
-
 elif (data==2):
         if (services.returnTypeOfOs() == "osx"):
                 services.speakText("Please provide a website url")
@@ -93,7 +87,6 @@ elif (data==2):
                 osx.openNewTab(url)        
         else:
                 print("Incompatible OS detected")
-elif (data==3):
-       pass
+                print("Incompatible OS detected")
 else:
         pass
