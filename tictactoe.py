@@ -3,7 +3,6 @@ from itertools import combinations, chain
 pos = [0, 2, 4, 8, 10, 12, 16, 18, 20]
 possub = [{0, 2, 4}, {8, 10, 12}, {16, 18, 20}, {0, 8, 16}, {2, 10, 18}, {4, 12, 20}, {0, 10, 20}, {4, 10, 16}]
 bars = [1, 3, 9, 11, 17, 19]
-bases = []
 def findsubsets(s, n): 
         return list(map(set, itertools.combinations(s, n))) 
 def makeBoard():
@@ -26,7 +25,6 @@ def makeBoard():
                                 "marked": None
                         }
                 else:
-                        bases.append(i)
                         thisdict = {
                                 "index": i,
                                 "value": "___",
@@ -74,11 +72,10 @@ def playerTwoMoveFunc(board, player2):
                 print("This position does not exist in the board")
                 playerTwoMoveFunc(board, player2)
 def checkWinner(board, player1, player2):
-        data = possub
         notFound = True
-        for i in range(len(data)):
+        for i in range(len(possub)):
                 a = []
-                for val in data[i]:
+                for val in possub[i]:
                         a.append(val)
                 if ((a[0] is not None and a[1] is not None and a[2] is not None) and (board[a[0]]["value"] == board[a[1]]["value"] == board[a[2]]["value"] != "  ")):
                         notFound = False
@@ -93,9 +90,13 @@ def checkWinner(board, player1, player2):
                 return True
         else:
                 return False
+def checkDraw(board):
+        draw = False
+        if (board[pos[0]]["value"] != "  " and board[pos[1]]["value"] != "  " and board[pos[2]]["value"] != "  " and board[pos[3]]["value"] != "  " and board[pos[4]]["value"] != "  " and board[pos[5]]["value"] != "  " and board[pos[6]]["value"] != "  " and board[pos[7]]["value"] != "  " and board[pos[8]]["value"] != "  "):
+                draw = True
+        return draw
+
                         
-                        
-                
 print("Welcome to Tic Tac Toe!")
 print("\n\n\n")
 board = makeBoard()
@@ -109,7 +110,17 @@ while(True):
         data = checkWinner(board, player1, player2)
         if (data == True):
                 break
+        else:
+                draw = checkDraw(board)
+                if (draw):
+                        print("Match is a tie")
+                        break
         playerTwoMoveFunc(board, player2)
         data = checkWinner(board, player1, player2)
         if (data == True):
-                break    
+                break
+        else:
+                draw = checkDraw(board)
+                if (draw):
+                        print("Match is a tie")
+                        break
