@@ -100,6 +100,7 @@ def checkDraw(board):
 print("Welcome to Tic Tac Toe!")
 print("\n\n\n")
 board = makeBoard()
+print(board)
 printBoard(board)
 print("\n\n\n")
 print("\nThere are 2 players in this game. \n Player 1 marks X and player 2 marks O \n Do not cheat. Enjoy!")
