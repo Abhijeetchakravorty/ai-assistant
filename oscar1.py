@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import services
 import osx
+import tictactoe
 try:
         _create_unverified_https_context = ssl._crate_unverified_context
 except AttributeError:
@@ -94,6 +95,6 @@ elif (data==2):
         else:
                 print("Incompatible OS detected")
 elif (data==3):
-       pass
+       tictactoe.startGame()
 else:
         pass

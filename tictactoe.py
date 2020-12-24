@@ -96,32 +96,32 @@ def checkDraw(board):
                 draw = True
         return draw
 
-                        
-print("Welcome to Tic Tac Toe!")
-print("\n\n\n")
-board = makeBoard()
-print(board)
-printBoard(board)
-print("\n\n\n")
-print("\nThere are 2 players in this game. \n Player 1 marks X and player 2 marks O \n Do not cheat. Enjoy!")
-player1 = input("Please provide player 1 name: ")
-player2 = input("Please provide player 2 name: ")
-while(True):
-        playerOneMoveFunc(board, player1)
-        data = checkWinner(board, player1, player2)
-        if (data == True):
-                break
-        else:
-                draw = checkDraw(board)
-                if (draw):
-                        print("Match is a tie")
+
+def startGame():
+        print("Welcome to Tic Tac Toe!")
+        print("\n\n\n")
+        board = makeBoard()
+        printBoard(board)
+        print("\n\n\n")
+        print("\nThere are 2 players in this game. \n Player 1 marks X and player 2 marks O \n Do not cheat. Enjoy!")
+        player1 = input("Please provide player 1 name: ")
+        player2 = input("Please provide player 2 name: ")
+        while(True):
+                playerOneMoveFunc(board, player1)
+                data = checkWinner(board, player1, player2)
+                if (data == True):
                         break
-        playerTwoMoveFunc(board, player2)
-        data = checkWinner(board, player1, player2)
-        if (data == True):
-                break
-        else:
-                draw = checkDraw(board)
-                if (draw):
-                        print("Match is a tie")
+                else:
+                        draw = checkDraw(board)
+                        if (draw):
+                                print("Match is a tie")
+                                break
+                playerTwoMoveFunc(board, player2)
+                data = checkWinner(board, player1, player2)
+                if (data == True):
                         break
+                else:
+                        draw = checkDraw(board)
+                        if (draw):
+                                print("Match is a tie")
+                                break
