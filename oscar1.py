@@ -15,7 +15,6 @@ else:
         #  2. Play some music \n
         #                                 3. Open a website with a url \n
         #                                 4. Open a game \n
-        #                                 5. Crawl some data \n
         #                                 6. Create a basic website \n
 
 services.speakText("""Welcome! I am Oscar. Your personal assistant""")
@@ -23,7 +22,8 @@ services.speakText("""I can perform some small tasks like
                                         1. Create calendar events \n
                                         2. Open a website with a url \n
                                         3. Open a game \n
-                                        
+                                        4. Crawl some data \n
+                                        5. Give me answer from wikipedia or wolfram
                 What would you like me to do?""")
 data = int(input("Enter choice: "))
 sec = 00.000000
