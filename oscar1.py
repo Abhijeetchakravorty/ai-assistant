@@ -23,7 +23,6 @@ services.speakText("""I can perform some small tasks like
                                         2. Open a website with a url \n
                                         3. Open a game \n
                                         4. Crawl some data \n
-                                        5. Give me answer from wikipedia or wolfram
                 What would you like me to do?""")
 data = int(input("Enter choice: "))
 sec = 00.000000
@@ -96,5 +95,7 @@ elif (data==2):
                 print("Incompatible OS detected")
 elif (data==3):
        tictactoe.startGame()
+elif (data==4):
+        pass
 else:
         pass
