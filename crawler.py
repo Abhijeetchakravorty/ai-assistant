@@ -3,6 +3,7 @@ class AmazonSpider(scrapy.Spider):
         name = "amazon"
         start_urls = [
                 'https://www.amazon.in/s?k=mobile&ref=nb_sb_noss',
+                'https://www.amazon.in/s?k=mobile&ref=nb_sb_noss_2',
                 'https://www.amazon.in/s?k=mobile&page=6&qid=1609099343&ref=sr_pg_7',
                 'https://www.amazon.in/s?k=mobile&page=6&qid=1609099343&ref=sr_pg_13',
                 'https://www.amazon.in/s?k=mobile&page=6&qid=1609099343&ref=sr_pg_19',
